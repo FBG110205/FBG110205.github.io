@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>必记必背-文言文名句分类图表</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #3498db;
+        }
+        h1 .subtitle {
+            display: block;
+            font-size: 0.6em;
+            color: #7f8c8d;
+            margin-top: 10px;
+            font-weight: normal;
+        }
+        .category-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border-left: 6px solid;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .category-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+        .category-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            padding-bottom: 10px;
+            border-bottom: 2px solid;
+        }
+        .table-container {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid #e1e8ed;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+        th {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            font-weight: bold;
+            padding: 18px 20px;
+            text-align: left;
+            border-bottom: 2px solid;
+            position: sticky;
+            top: 0;
+        }
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #eef2f7;
+            vertical-align: top;
+        }
+        tr:nth-child(even) {
+            background-color: #fafcff;
+        }
+        tr:hover {
+            background-color: #f0f7ff;
+        }
+        .num {
+            color: #fff;
+            font-weight: bold;
+            width: 50px;
+            text-align: center;
+            border-radius: 20px;
+            padding: 6px 0;
+            display: inline-block;
+            font-size: 0.9em;
+        }
+        .poem-title {
+            color: #2980b9;
+            font-weight: bold;
+            font-size: 1.05em;
+        }
+        .author {
+            color: #27ae60;
+            font-style: italic;
+        }
+        .question {
+            color: #2c3e50;
+            line-height: 1.6;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .question b {
+            color: #d35400;
+            font-weight: 700;
+        }
+        .answer {
+            color: #2c3e50;
+            line-height: 1.7;
+            background-color: #fff9c4;
+            padding: 12px 15px;
+            border-radius: 6px 6px 0 0;
+            border-left: 4px solid #f39c12;
+            font-weight: bold;
+            border-bottom: none;
+        }
+        .explanation {
+            color: #2c3e50;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            padding: 10px 15px 12px 15px;
+            border-radius: 0 0 6px 6px;
+            font-size: 0.95em;
+            color: #5d6d7e;
+            border-left: 4px solid #bdc3c7;
+            border-top: 1px dashed #ddd;
+        }
+        .explanation::before {
+            content: "📝 ";
+            margin-right: 5px;
+        }
+        .content-cell {
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+        
+        /* 不同分类的颜色 */
+        .category-analects { border-left-color: #e74c3c; }
+        .category-analects h2 { border-bottom-color: #e74c3c; color: #e74c3c; }
+        .category-analects th { border-bottom-color: #e74c3c; }
+        .category-analects .num { background-color: #e74c3c; }
+        
+        .category-room { border-left-color: #3498db; }
+        .category-room h2 { border-bottom-color: #3498db; color: #3498db; }
+        .category-room th { border-bottom-color: #3498db; }
+        .category-room .num { background-color: #3498db; }
+        
+        .category-three-gorges { border-left-color: #27ae60; }
+        .category-three-gorges h2 { border-bottom-color: #27ae60; color: #27ae60; }
+        .category-three-gorges th { border-bottom-color: #27ae60; }
+        .category-three-gorges .num { background-color: #27ae60; }
+        
+        .category-yueyang { border-left-color: #9b59b6; }
+        .category-yueyang h2 { border-bottom-color: #9b59b6; color: #9b59b6; }
+        .category-yueyang th { border-bottom-color: #9b59b6; }
+        .category-yueyang .num { background-color: #9b59b6; }
+        
+        .category-drunkard { border-left-color: #f39c12; }
+        .category-drunkard h2 { border-bottom-color: #f39c12; color: #f39c12; }
+        .category-drunkard th { border-bottom-color: #f39c12; }
+        .category-drunkard .num { background-color: #f39c12; }
+        
+        .category-lotus { border-left-color: #1abc9c; }
+        .category-lotus h2 { border-bottom-color: #1abc9c; color: #1abc9c; }
+        .category-lotus th { border-bottom-color: #1abc9c; }
+        .category-lotus .num { background-color: #1abc9c; }
+        
+        .category-night-tour { border-left-color: #e84393; }
+        .category-night-tour h2 { border-bottom-color: #e84393; color: #e84393; }
+        .category-night-tour th { border-bottom-color: #e84393; }
+        .category-night-tour .num { background-color: #e84393; }
+        
+        .category-tao-yuan { border-left-color: #2c3e50; }
+        .category-tao-yuan h2 { border-bottom-color: #2c3e50; color: #2c3e50; }
+        .category-tao-yuan th { border-bottom-color: #2c3e50; }
+        .category-tao-yuan .num { background-color: #2c3e50; }
+        
+        .category-stone-pool { border-left-color: #16a085; }
+        .category-stone-pool h2 { border-bottom-color: #16a085; color: #16a085; }
+        .category-stone-pool th { border-bottom-color: #16a085; }
+        .category-stone-pool .num { background-color: #16a085; }
+        
+        .category-horse { border-left-color: #8e44ad; }
+        .category-horse h2 { border-bottom-color: #8e44ad; color: #8e44ad; }
+        .category-horse th { border-bottom-color: #8e44ad; }
+        .category-horse .num { background-color: #8e44ad; }
+        
+        .category-stratagem { border-left-color: #c0392b; }
+        .category-stratagem h2 { border-bottom-color: #c0392b; color: #c0392b; }
+        .category-stratagem th { border-bottom-color: #c0392b; }
+        .category-stratagem .num { background-color: #c0392b; }
+        
+        .category-mencius { border-left-color: #d35400; }
+        .category-mencius h2 { border-bottom-color: #d35400; color: #d35400; }
+        .category-mencius th { border-bottom-color: #d35400; }
+        .category-mencius .num { background-color: #d35400; }
+        
+        .category-others { border-left-color: #7f8c8d; }
+        .category-others h2 { border-bottom-color: #7f8c8d; color: #7f8c8d; }
+        .category-others th { border-bottom-color: #7f8c8d; }
+        .category-others .num { background-color: #7f8c8d; }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #7f8c8d;
+            font-size: 0.95em;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .stats {
+            text-align: center;
+            margin: 20px 0;
+            color: #7f8c8d;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>必记必背-文言文名句分类图表<br><span class="subtitle">按篇目分类 · 带注释解释 · 共72条核心名句</span></h1>
+        
+        <div class="stats">
+            共14个篇目分类 | 《论语》(7条) | 《陋室铭》(4条) | 《三峡》(3条) | 《岳阳楼记》(6条) | 《醉翁亭记》(5条) | 《爱莲说》(4条) | 《记承天寺夜游》(4条) | 《答谢中书书》(2条) | 《与朱元思书》(4条) | 《生于忧患，死于安乐》(4条) | 《桃花源记》(5条) | 《小石潭记》(6条) | 《马说》(6条) | 《出师表》(7条) | 其他篇目(11条)
+        </div>
+
+        <!-- 1. 《论语》 -->
+        <div class="category-section category-analects">
+            <h2>📚 一、《论语》名句</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">1</span></td>
+                            <td><span class="poem-title">《论语》</span></td>
+                            <td><span class="author">孔子及其弟子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《论语》中阐述<b>学习与思考关系</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    学而不思则罔，思而不学则殆。
+                                </div>
+                                <div class="explanation">
+                                    解释：只学习而不思考，就会迷惑而无所得；只思考而不学习，就会精神疲倦而无所得。强调学思结合的重要性。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">2</span></td>
+                            <td><span class="poem-title">《论语》</span></td>
+                            <td><span class="author">孔子及其弟子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《论语》中表示<b>既要从正面学习，也要从反面借鉴</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    择其善者而从之，其不善者而改之。
+                                </div>
+                                <div class="explanation">
+                                    解释：选择他们的优点来学习，看到他们的缺点就对照自己加以改正。强调学习要善于借鉴，取长补短。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">3</span></td>
+                            <td><span class="poem-title">《论语》</span></td>
+                            <td><span class="author">孔子及其弟子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《论语》中表示<b>我们应当向有长处的人学习</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    三人行，必有我师焉。
+                                </div>
+                                <div class="explanation">
+                                    解释：几个人一起走路，其中必定有人可以做我的老师。强调要虚心向他人学习，随时发现别人的长处。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">4</span></td>
+                            <td><span class="poem-title">《论语》</span></td>
+                            <td><span class="author">孔子及其弟子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《论语》中当<b>别人不了解自己时，孔子认为应当采取的正确态度</b>是：
+                                </div>
+                                <div class="answer">
+                                    人不知而不愠，不亦君子乎？
+                                </div>
+                                <div class="explanation">
+                                    解释：别人不了解我，我也不生气，不也是君子吗？强调君子应该有宽容的胸怀，不因他人不了解自己而恼怒。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">5</span></td>
+                            <td><span class="poem-title">《论语》</span></td>
+                            <td><span class="author">孔子及其弟子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《论语》中表明<b>复习是学习的重要方法</b>，且对学习者有重要的意义的句子是：
+                                </div>
+                                <div class="answer">
+                                    温故而知新，可以为师矣。
+                                </div>
+                                <div class="explanation">
+                                    解释：温习旧的知识，能够从中获得新的理解和体会，这样的人就可以做老师了。强调复习的重要性。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">6</span></td>
+                            <td><span class="poem-title">《论语》</span></td>
+                            <td><span class="author">孔子及其弟子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《论语》中强调<b>学习态度要端正，切莫不懂装懂</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    知之为知之，不知为不知。
+                                </div>
+                                <div class="explanation">
+                                    解释：知道就是知道，不知道就是不知道。强调对待知识要有诚实的态度，不要不懂装懂。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">7</span></td>
+                            <td><span class="poem-title">《论语》</span></td>
+                            <td><span class="author">孔子及其弟子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    孔子在《述而》篇中论述<b>君子对富贵的正确态度</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    不义而富且贵，于我如浮云。
+                                </div>
+                                <div class="explanation">
+                                    解释：用不正当的手段得来的富贵，对我来说就像浮云一样。强调君子应该以道义为重，不追求不义的富贵。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">8</span></td>
+                            <td><span class="poem-title">《论语》</span></td>
+                            <td><span class="author">孔子及其弟子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    孔子告诫我们<b>要珍惜时光</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    逝者如斯夫，不舍昼夜。
+                                </div>
+                                <div class="explanation">
+                                    解释：时光像流水一样消逝，日夜不停。比喻时间流逝之快，提醒人们要珍惜时间。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 2. 《陋室铭》 -->
+        <div class="category-section category-room">
+            <h2>🏠 二、《陋室铭》名句</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">9</span></td>
+                            <td><span class="poem-title">《陋室铭》</span></td>
+                            <td><span class="author">刘禹锡</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《陋室铭》中<b>暗示虽陋室而不陋，点明文章主旨</b>的语句是：
+                                </div>
+                                <div class="answer">
+                                    斯是陋室，惟吾德馨。
+                                </div>
+                                <div class="explanation">
+                                    解释：这是简陋的屋子，只是我的品德高尚（就不觉得简陋了）。强调品德修养的重要性，物质条件不是决定因素。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">10</span></td>
+                            <td><span class="poem-title">《陋室铭》</span></td>
+                            <td><span class="author">刘禹锡</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《陋室铭》中写<b>陋室来往客人之高雅</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    谈笑有鸿儒，往来无白丁。
+                                </div>
+                                <div class="explanation">
+                                    解释：在这里谈笑的都是博学的人，往来的没有知识浅薄的人。表现主人交往的都是高雅之士。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">11</span></td>
+                            <td><span class="poem-title">《陋室铭》</span></td>
+                            <td><span class="author">刘禹锡</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《陋室铭》中<b>描写陋室优美的自然环境</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    苔痕上阶绿，草色入帘青。
+                                </div>
+                                <div class="explanation">
+                                    解释：苔藓痕迹碧绿，长到台阶上；草色青葱，映入竹帘里。描绘了陋室周围清幽的自然环境。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">12</span></td>
+                            <td><span class="poem-title">《陋室铭》</span></td>
+                            <td><span class="author">刘禹锡</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《陋室铭》中<b>引用孔子的话，画龙点睛，总结全文</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    何陋之有？
+                                </div>
+                                <div class="explanation">
+                                    解释：有什么简陋的呢？引用孔子的话，反问句式强调陋室不陋，收束全文，点明主旨。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 3. 《三峡》 -->
+        <div class="category-section category-three-gorges">
+            <h2>⛰️ 三、《三峡》名句</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">13</span></td>
+                            <td><span class="poem-title">《三峡》</span></td>
+                            <td><span class="author">郦道元</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《三峡》中<b>极尽夸张，从侧面烘托出三峡山的高峻险要、壮丽绚美</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    自非亭午夜分，不见曦月。
+                                </div>
+                                <div class="explanation">
+                                    解释：如果不是正午和半夜，就看不见太阳和月亮。通过夸张手法侧面表现三峡山势高峻，峡谷幽深。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">14</span></td>
+                            <td><span class="poem-title">《三峡》</span></td>
+                            <td><span class="author">郦道元</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《三峡》中用<b>夸张、侧面烘托江水流速极快</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    虽乘奔御风，不以疾也。
+                                </div>
+                                <div class="explanation">
+                                    解释：即使骑着快马，驾着风，也没有这么快。通过夸张和对比，突出三峡江水流速之快。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">15</span></td>
+                            <td><span class="poem-title">《三峡》</span></td>
+                            <td><span class="author">郦道元</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    郦道元描述的昔日"渔者歌曰"的描写三峡<b>凄异景状</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    巴东三峡巫峡长，猿鸣三声泪沾裳。
+                                </div>
+                                <div class="explanation">
+                                    解释：巴东三峡巫峡最长，猿猴叫几声，眼泪就沾湿了衣裳。通过渔歌表现三峡的凄凉景象，渲染悲凉气氛。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 4. 《岳阳楼记》 -->
+        <div class="category-section category-yueyang">
+            <h2>🏯 四、《岳阳楼记》名句</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">16</span></td>
+                            <td><span class="poem-title">《岳阳楼记》</span></td>
+                            <td><span class="author">范仲淹</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《岳阳楼记》中从<b>空间、时间角度描写岳阳楼雄伟景象</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    衔远山，吞长江，浩浩汤汤，横无际涯，朝晖夕阴，气象万千。
+                                </div>
+                                <div class="explanation">
+                                    解释：它连接着远方的山峦，吞吐着长江的流水，水势浩大，无边无际，早晚阴晴变化，景象千变万化。描绘岳阳楼壮阔景象。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">17</span></td>
+                            <td><span class="poem-title">《岳阳楼记》</span></td>
+                            <td><span class="author">范仲淹</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《岳阳楼记》中表现<b>作者关心国家大事</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    居庙堂之高则忧其民，处江湖之远则忧其君。
+                                </div>
+                                <div class="explanation">
+                                    解释：在朝廷做官就为百姓担忧，不在朝廷做官就为君主担忧。表现作者无论身处何地都心系国家、心系百姓的情怀。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">18</span></td>
+                            <td><span class="poem-title">《岳阳楼记》</span></td>
+                            <td><span class="author">范仲淹</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《岳阳楼记》中表达作者<b>旷达胸襟(情操高尚、思想境界、心态)</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    不以物喜，不以己悲。
+                                </div>
+                                <div class="explanation">
+                                    解释：不因外物的好坏和自己的得失而或喜或悲。表现作者超脱于个人得失的宽广胸怀。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">19</span></td>
+                            <td><span class="poem-title">《岳阳楼记》</span></td>
+                            <td><span class="author">范仲淹</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《岳阳楼记》中表达<b>作者政治抱负</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    先天下之忧而忧，后天下之乐而乐。
+                                </div>
+                                <div class="explanation">
+                                    解释：在天下人忧愁之前先忧愁，在天下人快乐之后才快乐。表现作者以天下为己任的崇高政治理想。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">20</span></td>
+                            <td><span class="poem-title">《岳阳楼记》</span></td>
+                            <td><span class="author">范仲淹</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《岳阳楼记》中<b>动静结合，描写洞庭湖月夜美景</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    浮光跃金，静影沉璧。
+                                </div>
+                                <div class="explanation">
+                                    解释：浮动的光闪着金色，静静的月影像沉下的玉璧。动静结合，描绘了洞庭湖月夜波光粼粼的美景。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">21</span></td>
+                            <td><span class="poem-title">《岳阳楼记》</span></td>
+                            <td><span class="author">范仲淹</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《岳阳楼记》中<b>借鸟欢鱼跃描绘晴明之景</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    沙鸥翔集，锦鳞游泳。
+                                </div>
+                                <div class="explanation">
+                                    解释：沙鸥时而飞翔时而停歇，美丽的鱼儿在水中游来游去。通过鸟鱼的活动表现晴明天气下洞庭湖的生机勃勃。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 5. 《醉翁亭记》 -->
+        <div class="category-section category-drunkard">
+            <h2>🍶 五、《醉翁亭记》名句</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">22</span></td>
+                            <td><span class="poem-title">《醉翁亭记》</span></td>
+                            <td><span class="author">欧阳修</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《醉翁亭记》中<b>描绘山间朝暮（早晚）之景</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    日出而林霏开，云归而岩穴暝，晦明变化者，山间之朝暮也。
+                                </div>
+                                <div class="explanation">
+                                    解释：太阳出来，树林里的雾气散开；云雾聚拢，山谷就显得昏暗。这种阴暗明亮的变化，就是山间的早晨和傍晚。描绘了山中早晚景色的变化。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">23</span></td>
+                            <td><span class="poem-title">《醉翁亭记》</span></td>
+                            <td><span class="author">欧阳修</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《醉翁亭记》中<b>贯穿全文主线</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    山水之乐，得之心而寓之酒也。
+                                </div>
+                                <div class="explanation">
+                                    解释：欣赏山水的乐趣，领会在心里，寄托在喝酒上。点明文章主旨，揭示醉翁之"醉"的真正原因。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">24</span></td>
+                            <td><span class="poem-title">《醉翁亭记》</span></td>
+                            <td><span class="author">欧阳修</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《醉翁亭记》中<b>写出醉翁言在此而意在彼，情趣所在</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    醉翁之意不在酒，在乎山水之间也。
+                                </div>
+                                <div class="explanation">
+                                    解释：醉翁的情趣不在于喝酒，而在于山水之间。揭示"醉翁"的真正意图是寄情山水，而非嗜酒。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">25</span></td>
+                            <td><span class="poem-title">《醉翁亭记》</span></td>
+                            <td><span class="author">欧阳修</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《醉翁亭记》中<b>以色彩鲜明的语言，描绘四季之景</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    野芳发而幽香，佳木秀而繁阴。风霜高洁，水落而石出者，山间之四时也。
+                                </div>
+                                <div class="explanation">
+                                    解释：野花开放，散发出清幽的香气；美好的树木枝叶繁茂，形成浓密的绿阴；风高霜洁；水落石出。这是山间的四季景色。概括了山中四季的不同美景。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">26</span></td>
+                            <td><span class="poem-title">《醉翁亭记》</span></td>
+                            <td><span class="author">欧阳修</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《醉翁亭记》中<b>概括描述滁州地理环境特征（领起全文）</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    环滁皆山也。
+                                </div>
+                                <div class="explanation">
+                                    解释：环绕着滁州城的都是山。简洁明了的开头，点明了滁州的地理环境特征。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 6. 《爱莲说》 -->
+        <div class="category-section category-lotus">
+            <h2>🌸 六、《爱莲说》名句</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">27</span></td>
+                            <td><span class="poem-title">《爱莲说》</span></td>
+                            <td><span class="author">周敦颐</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《爱莲说》中<b>描写莲花高洁质朴</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    出淤泥而不染，濯清涟而不妖。
+                                </div>
+                                <div class="explanation">
+                                    解释：从淤泥中长出来却不沾染污秽，在清水里洗涤过却不显得妖艳。赞美莲花洁身自好、不媚世俗的高贵品质。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">28</span></td>
+                            <td><span class="poem-title">《爱莲说》</span></td>
+                            <td><span class="author">周敦颐</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《爱莲说》中<b>最能概括莲花高贵品质的句子（主旨句）</b>是：
+                                </div>
+                                <div class="answer">
+                                    莲，花之君子者也。
+                                </div>
+                                <div class="explanation">
+                                    解释：莲花，是花中的君子。直接点明莲花的象征意义——君子。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">29</span></td>
+                            <td><span class="poem-title">《爱莲说》</span></td>
+                            <td><span class="author">周敦颐</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《爱莲说》中写<b>君子行为方正，通达事理，不攀附权贵</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    中通外直，不蔓不枝。
+                                </div>
+                                <div class="explanation">
+                                    解释：（莲的茎）中间贯通，外部笔直，不横生藤蔓，不旁生枝节。以莲的形态比喻君子正直通达、不攀附权贵的品格。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">30</span></td>
+                            <td><span class="poem-title">《爱莲说》</span></td>
+                            <td><span class="author">周敦颐</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    公园花展，观赏牡丹的人总比观赏其他花的人多，用《爱莲说》中的话来说，就是：
+                                </div>
+                                <div class="answer">
+                                    牡丹之爱，宜乎众矣。
+                                </div>
+                                <div class="explanation">
+                                    解释：对于牡丹的喜爱，人应该是很多了。通过对比，感叹世人大多追求富贵（牡丹象征富贵），含蓄表达对趋炎附势的社会风气的批评。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 7. 《记承天寺夜游》 -->
+        <div class="category-section category-night-tour">
+            <h2>🌙 七、《记承天寺夜游》名句</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">31</span></td>
+                            <td><span class="poem-title">《记承天寺夜游》</span></td>
+                            <td><span class="author">苏轼</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《记承天寺夜游》中<b>以凝练的笔墨，点染出一个空明澄澈、疏影摇曳、似真似幻的美妙境界</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    庭下如积水空明，水中藻、荇交横，盖竹柏影也。
+                                </div>
+                                <div class="explanation">
+                                    解释：庭院中的月光像积水一样清澈透明，水中水藻、荇菜交错纵横，原来是竹子和柏树的影子。用比喻手法，将月光比作积水，竹柏影比作水草，描绘出空灵澄澈的月夜美景。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">32</span></td>
+                            <td><span class="poem-title">《记承天寺夜游》</span></td>
+                            <td><span class="author">苏轼</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《记承天寺夜游》中<b>表露作者复杂而又旷达心境</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    何夜无月？何处无竹柏？但少闲人如吾两人者耳。
+                                </div>
+                                <div class="explanation">
+                                    解释：哪一夜没有月光？哪里没有竹子和柏树？只是缺少像我们两个这样的闲人罢了。表面自嘲为"闲人"，实则表达了作者超脱、旷达的胸襟，以及淡淡的贬谪悲凉。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">33</span></td>
+                            <td><span class="poem-title">《记承天寺夜游》</span></td>
+                            <td><span class="author">苏轼</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《记承天寺夜游》中作者<b>游承天寺的原因</b>：
+                                </div>
+                                <div class="answer">
+                                    月色入户，欣然起行。念无与为乐者。
+                                </div>
+                                <div class="explanation">
+                                    解释：月光照进门里，我高兴地起身出门。想到没有和我一起游乐的人。交代了夜游的起因：月夜美景触动，欲寻人共享。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">34</span></td>
+                            <td><span class="poem-title">《记承天寺夜游》</span></td>
+                            <td><span class="author">苏轼</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《记承天寺夜游》中<b>表达作者微妙复杂的感情语句（主旨句）</b>是：
+                                </div>
+                                <div class="answer">
+                                    何夜无月？何处无竹柏？但少闲人如吾两人者耳。
+                                </div>
+                                <div class="explanation">
+                                    解释：哪一夜没有月光？哪里没有竹子和柏树？只是缺少像我们两个这样的闲人罢了。点明主旨，既有赏月的欣喜，也有贬谪的悲凉和自我排遣的旷达。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 8. 《答谢中书书》和《与朱元思书》 -->
+        <div class="category-section category-tao-yuan">
+            <h2>📜 八、《答谢中书书》《与朱元思书》名句</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">35</span></td>
+                            <td><span class="poem-title">《答谢中书书》</span></td>
+                            <td><span class="author">陶弘景</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《答谢中书书》中<b>统领全文，充当本文引子</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    山川之美，古来共谈。
+                                </div>
+                                <div class="explanation">
+                                    解释：山河的壮美，自古以来就是人们共同谈论的话题。开门见山，点明文章主题——赞美山水之美。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">36</span></td>
+                            <td><span class="poem-title">《答谢中书书》</span></td>
+                            <td><span class="author">陶弘景</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《答谢中书书》中<b>运用仰观俯察两种视角，写白云高山流水三重风物的对偶句</b>是：
+                                </div>
+                                <div class="answer">
+                                    高峰入云，清流见底。
+                                </div>
+                                <div class="explanation">
+                                    解释：巍峨的山峰耸入云端，明净的溪流清澈见底。仰观山峰，俯察溪流，对仗工整，描绘了山水的高远与清澈。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">37</span></td>
+                            <td><span class="poem-title">《与朱元思书》</span></td>
+                            <td><span class="author">吴均</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《与朱元思书》中<b>从侧面表现江水清澈</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    游鱼细石，直视无碍。
+                                </div>
+                                <div class="explanation">
+                                    解释：游动的鱼儿和细小的石头，一直看下去可以看得很清楚，毫无障碍。通过能看见鱼和石头来侧面表现江水的清澈透明。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">38</span></td>
+                            <td><span class="poem-title">《与朱元思书》</span></td>
+                            <td><span class="author">吴均</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《与朱元思书》中<b>赋予静止的山以奋发向上的无穷生命力</b>的四句是：
+                                </div>
+                                <div class="answer">
+                                    负势竞上，互相轩邈；争高直指，千百成峰。
+                                </div>
+                                <div class="explanation">
+                                    解释：（山峦）凭借着（高峻的）地势，争着向上，仿佛互相争着往高处和远处伸展；它们都在争高，笔直地向上，形成了成千上百的山峰。运用拟人手法，化静为动，写出山的雄奇与生命力。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">39</span></td>
+                            <td><span class="poem-title">《与朱元思书》</span></td>
+                            <td><span class="author">吴均</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《与朱元思书》中<b>表达作者对富春江奇山异水的赞美、留恋以及鄙弃功名、淡泊名利的思想感情</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    鸢飞戾天者，望峰息心；经纶世务者，窥谷忘反。
+                                </div>
+                                <div class="explanation">
+                                    解释：那些极力追求名利的人，看到这些雄奇的山峰就会平息热衷功名的心；那些治理政务的人，看到这些幽美的山谷就会流连忘返。通过对比，表达了对自然山水的热爱和对功名利禄的鄙弃。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 9. 《生于忧患，死于安乐》 -->
+        <div class="category-section category-mencius">
+            <h2>⚖️ 九、《生于忧患，死于安乐》名句</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">40</span></td>
+                            <td><span class="poem-title">《生于忧患，死于安乐》</span></td>
+                            <td><span class="author">孟子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《生于忧患，死于安乐》中指出了<b>艰苦磨炼益处</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    所以动心忍性，曾益其所不能。
+                                </div>
+                                <div class="explanation">
+                                    解释：通过这些来使他的内心受到震撼，使他的性格坚忍起来，增加他原来所不具备的才能。说明磨难可以激发人的意志，增长人的才干。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">41</span></td>
+                            <td><span class="poem-title">《生于忧患，死于安乐》</span></td>
+                            <td><span class="author">孟子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《生于忧患，死于安乐》中<b>从内外两个方面说明了导致亡国的原因</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    入则无法家拂士，出则无敌国外患者。
+                                </div>
+                                <div class="explanation">
+                                    解释：在国内没有坚守法度的大臣和辅佐君王的贤士，在国外没有敌对的国家和外患的侵扰。从内政和外交两方面论述国家灭亡的原因。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">42</span></td>
+                            <td><span class="poem-title">《生于忧患，死于安乐》</span></td>
+                            <td><span class="author">孟子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《生于忧患，死于安乐》中<b>总结全文，归纳中心论点</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    然后知生于忧患，而死于安乐也。
+                                </div>
+                                <div class="explanation">
+                                    解释：这样以后才知道，常处忧愁祸患之中可以使人生存，常处安逸快乐之中可以使人死亡。点明中心论点：忧患使人生存发展，安逸享乐使人萎靡死亡。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">43</span></td>
+                            <td><span class="poem-title">《生于忧患，死于安乐》</span></td>
+                            <td><span class="author">孟子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《生于忧患，死于安乐》中<b>说明人才必须经过艰苦磨炼的作用</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    故天将降大任于是人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身，行拂乱其所为，所以动心忍性，曾益其所不能。
+                                </div>
+                                <div class="explanation">
+                                    解释：所以上天要把重大责任降临在这个人身上时，一定先要使他的内心痛苦，使他的筋骨劳累，使他经受饥饿，以致肌肤消瘦，使他身受贫困之苦，使他做事不顺，（通过这些）来使他的内心受到震撼，使他的性格坚忍起来，增加他原来所不具备的才能。论述了人才成长必须经历磨难的观点。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 10. 《桃花源记》 -->
+        <div class="category-section category-tao-yuan">
+            <h2>🍑 十、《桃花源记》名句</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">44</span></td>
+                            <td><span class="poem-title">《桃花源记》</span></td>
+                            <td><span class="author">陶渊明</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《桃花源记》中<b>描写桃花源中人幸福生活</b>的语句：
+                                </div>
+                                <div class="answer">
+                                    黄发垂髫，并怡然自乐。
+                                </div>
+                                <div class="explanation">
+                                    解释：老人和小孩都安闲快乐。描绘了桃花源中人们安居乐业、无忧无虑的生活图景。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">45</span></td>
+                            <td><span class="poem-title">《桃花源记》</span></td>
+                            <td><span class="author">陶渊明</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《桃花源记》中<b>描写桃源人来此绝境的原因</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    自云先世避秦时乱，率妻子邑人来此绝境，不复出焉，遂与外人间隔。
+                                </div>
+                                <div class="explanation">
+                                    解释：他们自己说祖先为了躲避秦朝时的战乱，带领妻子儿女和乡邻来到这个与世隔绝的地方，不再出去，于是跟外面的人断绝了来往。交代了桃花源形成的历史原因。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">46</span></td>
+                            <td><span class="poem-title">《桃花源记》</span></td>
+                            <td><span class="author">陶渊明</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《桃花源记》中<b>描写桃源人生活环境</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    土地平旷，屋舍俨然，有良田美池桑竹之属，阡陌交通，鸡犬相闻。
+                                </div>
+                                <div class="explanation">
+                                    解释：土地平坦开阔，房屋整整齐齐，有肥沃的田地、美丽的池塘和桑树竹林这类景物。田间小路交错相通，村落间能互相听到鸡鸣狗叫的声音。描绘了桃花源宁静、富足、和谐的田园生活景象。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">47</span></td>
+                            <td><span class="poem-title">《桃花源记》</span></td>
+                            <td><span class="author">陶渊明</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《桃花源记》中<b>最能表明桃花源人与外界相隔久远</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    问今是何世，乃不知有汉，无论魏晋。
+                                </div>
+                                <div class="explanation">
+                                    解释：（他们）问现在是什么朝代，竟然不知道有过汉朝，更不必说魏晋了。通过桃源人不知朝代更迭，突出桃花源与世隔绝之久。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">48</span></td>
+                            <td><span class="poem-title">《桃花源记》</span></td>
+                            <td><span class="author">陶渊明</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《桃花源记》中<b>最能体现桃花源人热情好客</b>的句子有：
+                                </div>
+                                <div class="answer">
+                                    便要还家，设酒杀鸡作食。村中闻有此人，咸来问讯。
+                                </div>
+                                <div class="explanation">
+                                    解释：（桃源人）就邀请（渔人）到自己家里去，摆酒杀鸡做饭（来款待他）。村里的人听说来了这么一个人，都来打听消息。通过具体行动和全村人的反应，表现了桃花源人的淳朴热情。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 11. 《小石潭记》 -->
+        <div class="category-section category-stone-pool">
+            <h2>💧 十一、《小石潭记》名句</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">49</span></td>
+                            <td><span class="poem-title">《小石潭记》</span></td>
+                            <td><span class="author">柳宗元</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《小石潭记》中<b>作者抓住景物的特点，运用形象的比喻，描写溪身、溪水</b>的语句是：
+                                </div>
+                                <div class="answer">
+                                    斗折蛇行，明灭可见。
+                                </div>
+                                <div class="explanation">
+                                    解释：（溪流）像北斗星那样曲折，像蛇那样蜿蜒前行，时隐时现。用北斗星和蛇来比喻溪流的曲折蜿蜒，形象生动。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">50</span></td>
+                            <td><span class="poem-title">《小石潭记》</span></td>
+                            <td><span class="author">柳宗元</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《小石潭记》中<b>描写潭周围树木</b>的语句是：
+                                </div>
+                                <div class="answer">
+                                    青树翠蔓，蒙络摇缀，参差披拂。
+                                </div>
+                                <div class="explanation">
+                                    解释：青葱的树木，翠绿的藤蔓，覆盖缠绕，摇动下垂，参差不齐，随风飘拂。描绘了小石潭周围生机勃勃的植物景象。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">51</span></td>
+                            <td><span class="poem-title">《小石潭记》</span></td>
+                            <td><span class="author">柳宗元</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《小石潭记》中<b>表现地理环境使作者内心忧伤凄凉</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    凄神寒骨，悄怆幽邃。
+                                </div>
+                                <div class="explanation">
+                                    解释：使人感到心神凄凉，寒气透骨，幽静深远，弥漫着忧伤的气息。情景交融，表达了作者被贬后孤寂悲凉的心境。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">52</span></td>
+                            <td><span class="poem-title">《小石潭记》</span></td>
+                            <td><span class="author">柳宗元</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《小石潭记》中<b>写潭中鱼游来游去，非常活跃</b>的语句是：
+                                </div>
+                                <div class="answer">
+                                    俶尔远逝，往来翕忽。
+                                </div>
+                                <div class="explanation">
+                                    解释：忽然间向远处游去，来来往往轻快敏捷。通过写鱼儿的动态，侧面表现了潭水的清澈和生机。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">53</span></td>
+                            <td><span class="poem-title">《小石潭记》</span></td>
+                            <td><span class="author">柳宗元</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《小石潭记》中<b>写出小石潭源头悠远、两岸弯曲</b>的语句是：
+                                </div>
+                                <div class="answer">
+                                    其岸势犬牙差互，不可知其源。
+                                </div>
+                                <div class="explanation">
+                                    解释：溪岸的形状像狗的牙齿那样交错不齐，不知道它的源头在哪里。用"犬牙差互"比喻岸势，形象地写出了溪岸的曲折。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">54</span></td>
+                            <td><span class="poem-title">《小石潭记》</span></td>
+                            <td><span class="author">柳宗元</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《小石潭记》中<b>侧面写潭水清澈</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    皆若空游无所依，日光下澈，影布石上。
+                                </div>
+                                <div class="explanation">
+                                    解释：（鱼儿）都好像在空中游动，没有什么依靠似的。阳光照到水底，鱼的影子映在水底的石头上。通过写鱼"空游"和影子清晰，侧面表现潭水的清澈透明。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 12. 《马说》 -->
+        <div class="category-section category-horse">
+            <h2>🐎 十二、《马说》名句</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">55</span></td>
+                            <td><span class="poem-title">《马说》</span></td>
+                            <td><span class="author">韩愈</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《马说》的<b>中心论点</b>是：
+                                </div>
+                                <div class="answer">
+                                    世有伯乐，然后有千里马。
+                                </div>
+                                <div class="explanation">
+                                    解释：世上有了伯乐，然后才会有千里马。开门见山提出中心论点：人才需要被发现和赏识。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">56</span></td>
+                            <td><span class="poem-title">《马说》</span></td>
+                            <td><span class="author">韩愈</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《马说》中<b>千里马的悲惨遭遇</b>是：
+                                </div>
+                                <div class="answer">
+                                    祇辱于奴隶人之手，骈死于槽枥之间。
+                                </div>
+                                <div class="explanation">
+                                    解释：只是辱没在仆役的手中，（和普通的马）一同死在马厩里。描绘了千里马被埋没、得不到重用的悲惨命运。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">57</span></td>
+                            <td><span class="poem-title">《马说》</span></td>
+                            <td><span class="author">韩愈</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《马说》中<b>千里马被埋没的根本原因</b>是：
+                                </div>
+                                <div class="answer">
+                                    食马者不知其能千里而食也。
+                                </div>
+                                <div class="explanation">
+                                    解释：喂马的人不懂得要根据它能日行千里的特点来喂养它。指出千里马被埋没的根本原因在于"食马者"的无知。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">58</span></td>
+                            <td><span class="poem-title">《马说》</span></td>
+                            <td><span class="author">韩愈</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《马说》中<b>运用设问句表达作者心中感慨</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    其真无马邪？其真不知马也。
+                                </div>
+                                <div class="explanation">
+                                    解释：难道真的没有千里马吗？恐怕是他们真的不认识千里马啊！运用设问和反问，强烈谴责了不识人才、埋没人才的社会现象。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">59</span></td>
+                            <td><span class="poem-title">《马说》</span></td>
+                            <td><span class="author">韩愈</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《马说》中<b>表明愚妄无知，平庸浅薄的统治者对千里马的不公正的待遇</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    策之不以其道，食之不能尽其材，鸣之而不能通其意。
+                                </div>
+                                <div class="explanation">
+                                    解释：驱使它不按照正确的方法，喂养它不能竭尽它的才能，它鸣叫却不能通晓它的意思。从驱使、喂养、理解三方面具体说明"食马者"如何埋没千里马。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">60</span></td>
+                            <td><span class="poem-title">《马说》</span></td>
+                            <td><span class="author">韩愈</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《马说》中<b>能表明千里马外在特征</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    马之千里者，一食或尽粟一石。
+                                </div>
+                                <div class="explanation">
+                                    解释：能够日行千里的马，一顿有时能吃下一石粮食。通过食量之大侧面表现千里马的特殊才能和需求。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 13. 《出师表》 -->
+        <div class="category-section category-stratagem">
+            <h2>📜 十三、《出师表》名句</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">61</span></td>
+                            <td><span class="poem-title">《出师表》</span></td>
+                            <td><span class="author">诸葛亮</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《出师表》中<b>叙述诸葛亮追随先帝驱驰的原因</b>是：
+                                </div>
+                                <div class="answer">
+                                    先帝不以臣卑鄙，猥自枉屈，三顾臣于草庐之中，咨臣以当世之事，由是感激。
+                                </div>
+                                <div class="explanation">
+                                    解释：先帝不因为我身份卑微、见识短浅，降低身份委屈自己，三次到草庐来拜访我，向我询问当时的天下大事，我因此十分感动奋发。交代了诸葛亮感激刘备知遇之恩而忠心辅佐的原因。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">62</span></td>
+                            <td><span class="poem-title">《出师表》</span></td>
+                            <td><span class="author">诸葛亮</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《出师表》中，诸葛亮<b>分析先汉兴隆的原因</b>是：
+                                </div>
+                                <div class="answer">
+                                    亲贤臣，远小人。
+                                </div>
+                                <div class="explanation">
+                                    解释：亲近贤臣，疏远小人。通过历史经验总结出治国的重要原则。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">63</span></td>
+                            <td><span class="poem-title">《出师表》</span></td>
+                            <td><span class="author">诸葛亮</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《出师表》中诸葛亮<b>劝刘禅对宫中、府中官员的赏罚要坚持同一标准</b>的句子：
+                                </div>
+                                <div class="answer">
+                                    陟罚臧否，不宜异同。
+                                </div>
+                                <div class="explanation">
+                                    解释：奖惩功过、好坏，不应该因在宫中或在府中而异。强调执法要公正，不能有亲疏之别。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">64</span></td>
+                            <td><span class="poem-title">《出师表》</span></td>
+                            <td><span class="author">诸葛亮</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    当<b>任命一个人来挽救局面</b>，人们常引用的《出师表》中的一句名言是：
+                                </div>
+                                <div class="answer">
+                                    受任于败军之际，奉命于危难之间。
+                                </div>
+                                <div class="explanation">
+                                    解释：在兵败的时候接受重任，在危难的时候奉命出使。表现了诸葛亮临危受命、勇担重任的精神，现常用于形容临危受命。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">65</span></td>
+                            <td><span class="poem-title">《出师表》</span></td>
+                            <td><span class="author">诸葛亮</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《出师表》中<b>表明作者志趣</b>的句子：
+                                </div>
+                                <div class="answer">
+                                    苟全性命于乱世，不求闻达于诸侯。
+                                </div>
+                                <div class="explanation">
+                                    解释：在乱世中苟且保全性命，不希求在诸侯中扬名显贵。表明诸葛亮原本淡泊名利、不求闻达的志趣。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">66</span></td>
+                            <td><span class="poem-title">《出师表》</span></td>
+                            <td><span class="author">诸葛亮</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《出师表》中，作者向后主提出的<b>三条建议</b>是：
+                                </div>
+                                <div class="answer">
+                                    ① 开张圣听；② 严明赏罚；③ 亲贤远佞。
+                                </div>
+                                <div class="explanation">
+                                    解释：① 扩大圣明的听闻；② 严明赏罚；③ 亲近贤臣，疏远小人。这是诸葛亮向后主刘禅提出的核心治国建议。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">67</span></td>
+                            <td><span class="poem-title">《出师表》</span></td>
+                            <td><span class="author">诸葛亮</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《出师表》中<b>作者指出出师北伐战略目标</b>的句子：
+                                </div>
+                                <div class="answer">
+                                    当奖率三军，北定中原，庶竭驽钝，攘除奸凶，兴复汉室，还于旧都。
+                                </div>
+                                <div class="explanation">
+                                    解释：应当激励率领全军将士，向北平定中原，希望竭尽我平庸的才能，铲除奸邪凶恶的敌人，复兴汉朝王室，回到原来的都城。表明北伐的目的和决心。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 14. 其他篇目 -->
+        <div class="category-section category-others">
+            <h2>📖 十四、其他篇目名句</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">68</span></td>
+                            <td><span class="poem-title">《虽有嘉肴》</span></td>
+                            <td><span class="author">《礼记》</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《虽有嘉肴》中<b>揭示教与学互相促进的道理</b>的句子：
+                                </div>
+                                <div class="answer">
+                                    教学相长也。
+                                </div>
+                                <div class="explanation">
+                                    解释：教和学是互相促进的。点明主旨，说明教和学是相辅相成、相互促进的关系。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">69</span></td>
+                            <td><span class="poem-title">《鱼我所欲也》</span></td>
+                            <td><span class="author">孟子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《鱼我所欲也》文中<b>全篇的中心论点</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    舍生而取义者也。
+                                </div>
+                                <div class="explanation">
+                                    解释：舍弃生命而选择道义。点明中心论点：在生命和道义不能两全时，应选择道义。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">70</span></td>
+                            <td><span class="poem-title">《送东阳马生序》</span></td>
+                            <td><span class="author">宋濂</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《送东阳马生序》中<b>表达作者发奋苦学，不羡慕同舍生的原因</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    以中有足乐者，不知口体之奉不若人也。
+                                </div>
+                                <div class="explanation">
+                                    解释：因为心中有足以快乐的事（指读书），不觉得吃的穿的不如别人。表现了作者以读书为乐、不慕物质享受的精神境界。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">71</span></td>
+                            <td><span class="poem-title">《曹刿论战》</span></td>
+                            <td><span class="author">左丘明</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《曹刿论战》中<b>表现曹刿"取信于民"的战略思想</b>（认为"可以一战"的条件）的句子：
+                                </div>
+                                <div class="answer">
+                                    小大之狱，虽不能察，必以情。
+                                </div>
+                                <div class="explanation">
+                                    解释：大大小小的案件，即使不能一一明察，也一定要根据实情处理。曹刿认为这是取信于民、获得民心支持的关键。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">72</span></td>
+                            <td><span class="poem-title">《邹忌讽齐王纳谏》</span></td>
+                            <td><span class="author">刘向</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《邹忌讽齐王纳谏》中写<b>邹忌经过思索，找出妻、妾、客认为自己比徐公美的原因</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    吾妻之美我者，私我也；妾之美我者，畏我也；客之美我者，欲有求于我也。
+                                </div>
+                                <div class="explanation">
+                                    解释：我的妻子认为我美，是偏爱我；妾认为我美，是害怕我；客人认为我美，是想有求于我。邹忌通过反思，认识到他人称赞自己的不同动机，为下文讽谏齐王作铺垫。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">73</span></td>
+                            <td><span class="poem-title">《富贵不能淫》</span></td>
+                            <td><span class="author">孟子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    在《富贵不能淫》中对<b>"大丈夫"是如何要求</b>的：
+                                </div>
+                                <div class="answer">
+                                    富贵不能淫，贫贱不能移，威武不能屈。
+                                </div>
+                                <div class="explanation">
+                                    解释：富贵不能使他迷惑，贫贱不能使他动摇，威武不能使他屈服。提出了"大丈夫"应该具备的道德标准。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">74</span></td>
+                            <td><span class="poem-title">《逍遥游》</span></td>
+                            <td><span class="author">庄子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《逍遥游》中<b>庄子用一个比喻句来描述鲲鹏奋飞时情形</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    怒而飞，其翼若垂天之云。
+                                </div>
+                                <div class="explanation">
+                                    解释：（鹏鸟）振翅奋飞，它的翅膀就像悬挂在天边的云彩。用夸张的比喻描绘鹏鸟展翅的宏大景象。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">75</span></td>
+                            <td><span class="poem-title">《曹刿论战》</span></td>
+                            <td><span class="author">左丘明</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《曹刿论战》中<b>曹刿请见鲁庄公的根本原因</b>是：
+                                </div>
+                                <div class="answer">
+                                    肉食者鄙，未能远谋。
+                                </div>
+                                <div class="explanation">
+                                    解释：当权的人目光短浅，不能深谋远虑。曹刿认为当权者无能，所以自己要参与国事。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">76</span></td>
+                            <td><span class="poem-title">《曹刿论战》</span></td>
+                            <td><span class="author">左丘明</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《曹刿论战》中<b>能体现勇气在战争中的作用</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    夫战，勇气也。一鼓作气，再而衰，三而竭。
+                                </div>
+                                <div class="explanation">
+                                    解释：作战，靠的是勇气。第一次击鼓能够振作士气，第二次击鼓士气就衰弱了，第三次击鼓士气就枯竭了。曹刿论述了士气在战争中的重要性。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">77</span></td>
+                            <td><span class="poem-title">《邹忌讽齐王纳谏》</span></td>
+                            <td><span class="author">刘向</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《邹忌讽齐王纳谏》中写<b>齐王受邹忌启发，用悬赏的方法广泛征求臣民意见</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    群臣吏民，能面刺寡人之过者，受上赏；上书谏寡人者，受中赏；能谤讥于市朝，闻寡人之耳者，受下赏。
+                                </div>
+                                <div class="explanation">
+                                    解释：所有大臣、官吏、百姓，能够当面批评我过错的，得上等奖赏；上书劝谏我的，得中等奖赏；能够在公共场所指责议论（我的过失），使我听到的，得下等奖赏。体现了齐王虚心纳谏、广开言路的决心。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">78</span></td>
+                            <td><span class="poem-title">《鱼我所欲也》</span></td>
+                            <td><span class="author">孟子</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《鱼我所欲也》文中<b>作者说人人都有向善之心而贤者能做到坚持不懈</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    非独贤者有是心也，人皆有之，贤者能勿丧耳。
+                                </div>
+                                <div class="explanation">
+                                    解释：不只是贤人有这种心，人人都有，不过贤人能够不丧失（它）罢了。说明向善之心人皆有之，区别在于能否坚守。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>必记必背-文言文名句分类图表 | 共14个篇目分类，78条核心名句</p>
+            <p>📊 系统分类 · 带注释解释 · 便于理解记忆 · 适合中考高考复习备考</p>
+            <p>✨ 分类统计：《论语》(7条) | 《陋室铭》(4条) | 《三峡》(3条) | 《岳阳楼记》(6条) | 《醉翁亭记》(5条) | 《爱莲说》(4条) | 《记承天寺夜游》(4条) | 《答谢中书书》(2条) | 《与朱元思书》(4条) | 《生于忧患，死于安乐》(4条) | 《桃花源记》(5条) | 《小石潭记》(6条) | 《马说》(6条) | 《出师表》(7条) | 其他篇目(11条)</p>
+        </div>
+    </div>
+</body>
+</html>
